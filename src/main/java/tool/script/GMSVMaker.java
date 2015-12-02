@@ -1,10 +1,10 @@
 package tool.script;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.LineNumberReader;
+import java.io.InputStreamReader;
 import java.util.List;
 
 public class GMSVMaker {
@@ -17,7 +17,6 @@ public class GMSVMaker {
 		File bat = new File(dir, "antlr4.bat");
 		makeBat(bat, g4);
 		execBat(bat);
-		addPackage(dir, "cg.data.script.antlr");
 		clearFileButJava(dir);
 	}
 	
@@ -45,42 +44,15 @@ public class GMSVMaker {
 	
 	public static void execBat(File bat) {
 		try {
-			Runtime.getRuntime().exec(bat.getPath());
+			Process process = Runtime.getRuntime().exec(bat.getPath());
+			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+			String line;
+			while ((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-	
-	public static void addPackage(File dir, String pkg) {
-		for (File java : dir.listFiles(file -> file.getName().endsWith(".java"))) {
-			StringBuilder builder = new StringBuilder();
-			try (LineNumberReader reader = new LineNumberReader(new FileReader(java))) {
-				String line;
-				boolean addPackage = false;
-				while ((line = reader.readLine()) != null) {
-					if (addPackage) {
-						builder.append(line).append("\r\n");
-					} else {
-						if (line.trim().startsWith("//")) {
-							builder.append(line).append("\r\n");
-						} else if (line.trim().startsWith("package")) {
-							builder.append(line).append("\r\n");
-							addPackage = true;
-						} else {
-							builder.append("package ").append(pkg).append(";").append("\r\n");
-							builder.append(line).append("\r\n");
-							addPackage = true;
-						}
-					}
-				}
-				
-				FileWriter writer = new FileWriter(java);
-				writer.append(builder.toString());
-				writer.flush();
-				writer.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 	}
 	
