@@ -13,7 +13,7 @@ public class GMSVGrammarMaker {
 		StringBuilder builder = new StringBuilder(readTemplate(template));
 		grammars.forEach((grammar) -> {
 			String rule = grammar.getName().trim().toLowerCase();
-			builder.append(rule).append(" : ").append(rule);
+			builder.append(rule).append(" : '").append(rule).append("'");
 			grammar.getParams().forEach((attribute) -> {
 				builder.append(" ").append(attribute.getClazz().toUpperCase());
 			});
