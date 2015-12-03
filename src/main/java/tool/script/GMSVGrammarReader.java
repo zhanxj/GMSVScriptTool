@@ -44,9 +44,10 @@ public class GMSVGrammarReader {
 			Row row = sheet.getRow(rowNumber);
 			grammar.setName(row.getCell(0).getStringCellValue());
 			grammar.setDescript(row.getCell(1).getStringCellValue());
-			grammar.setReturnValue(createAttribute(row, 2, 3));
+			grammar.setPattern(row.getCell(2).getStringCellValue());
+			grammar.setReturnValue(createAttribute(row, 3, 4));
 			for (int i = 0;i < 5;i++) {
-				grammar.addParam(createAttribute(row, 4 + (i << 1), 5 + (i << 1)));
+				grammar.addParam(createAttribute(row, 5 + (i << 1), 6 + (i << 1)));
 			}
 			grammars.add(grammar);
 		}

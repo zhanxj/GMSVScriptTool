@@ -6,7 +6,7 @@ import com.google.common.collect.Lists;
 
 public class Grammar {
 	
-	private String name, descript;
+	private String name, descript, pattern;
 	
 	private Attribute returnValue;
 	
@@ -48,6 +48,14 @@ public class Grammar {
 		if (param != null) {
 			params.add(param);
 		}
+	}
+
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
 	}
 
 }
