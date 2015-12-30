@@ -10,11 +10,11 @@ NEWLINE:'\r' ? '\n' ;
 LOGIC : AMPERSAND AMPERSAND | BITWISEOR BITWISEOR;
 DEFINE_VALUE : INT(',' INT)*;
 
+fragment LETTER : ('A'..'Z' | 'a'..'z');
+fragment CHINESECHAR : '\u4E00' .. '\u9FA5' | '\uF900' .. '\uFA2D';
+fragment DIGIT : '0' .. '9';
 NAME : (LETTER | UNDERLINE) (LETTER | UNDERLINE | DIGIT)* ;
-LETTER : ('A'..'Z' | 'a'..'z');
-CHINESECHAR : '\u4E00' .. '\u9FA5' | '\uF900' .. '\uFA2D';
 INT : DIGIT+;
-DIGIT : '0' .. '9';
 COLON : ':' ;
 COMMA : ',' ;
 SEMICOLON : ';' ;
@@ -44,7 +44,7 @@ BITWISEOR : '|' ;
 BITWISEXOR : '^' ;
 POUND : '#';
 DOLLAR : '$';
-COMMENT : '/*' ()*? '*/' {setChannel(HIDDEN);} ;
+COMMENT : '/*' ( options {greedy=false;} : ()*? ) * '*/' {setChannel(HIDDEN);} ;
 LINE_COMMENT : ('#' | '//') ~ ('\n' | '\r') * '\r'? '\n' {setChannel(HIDDEN);} ;
 WS : ( ' ' | '\t' | '\n' | '\r' ) + {skip();} ;
 
