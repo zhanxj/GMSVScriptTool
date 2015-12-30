@@ -44,9 +44,10 @@ BITWISEOR : '|' ;
 BITWISEXOR : '^' ;
 POUND : '#';
 DOLLAR : '$';
-COMMENT : '/*' ( options {greedy=false;} : ()*? ) * '*/' {setChannel(HIDDEN);} ;
+COMMENT : '/*' ( options {} : ()*? ) * '*/' {setChannel(HIDDEN);} ;
 LINE_COMMENT : ('#' | '//') ~ ('\n' | '\r') * '\r'? '\n' {setChannel(HIDDEN);} ;
 WS : ( ' ' | '\t' | '\n' | '\r' ) + {skip();} ;
+EQUAL : '==' ;
 
 /* =========================================== */
 /*               system function               */

@@ -17,7 +17,7 @@ public class GMSVMaker {
 		File bat = new File(dir, "antlr4.bat");
 		makeBat(bat, g4);
 		execBat(bat);
-		clearFileButJava(dir);
+//		clearFileButJava(dir);
 	}
 	
 	public static void makeBat(File bat, File g4) {

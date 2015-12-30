@@ -12,12 +12,14 @@ public class GMSVGrammarMaker {
 	public void make(List<Grammar> grammars, File dest, File template) {
 		StringBuilder builder = new StringBuilder(readTemplate(template));
 		grammars.forEach((grammar) -> {
-			String rule = grammar.getName().trim();
-			builder.append(rule.toLowerCase()).append(" : '").append(rule).append("'");
-			grammar.getParams().forEach((attribute) -> {
-				builder.append(" ").append(attribute.getClazz().toUpperCase());
-			});
-			builder.append("; // ").append(grammar.getDescript()).append("\r\n");
+			if (grammar.getPattern().length() > 0) {
+				String rule = grammar.getName().trim();
+				builder.append(rule.toLowerCase()).append(" : ").append(grammar.getPattern());
+				grammar.getParams().forEach((attribute) -> {
+					builder.append(" ").append(attribute.getClazz().toUpperCase());
+				});
+				builder.append("; // ").append(grammar.getDescript()).append("\r\n");
+			}
 		});
 		
 		try {
