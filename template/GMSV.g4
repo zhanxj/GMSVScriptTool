@@ -6,7 +6,7 @@ package cg.data.script.antlr;
 
 STRING : ('a'..'z' | 'A'..'Z' | '0'..'9')+ ; 
 BOOLEAN : 'true' | 'false' ;
-NEWLINE:'\r' ? '\n' ; 
+//NEWLINE:'\r' ? '\n' ; 
 LOGIC : AMPERSAND AMPERSAND | BITWISEOR BITWISEOR;
 DEFINE_VALUE : INT(',' INT)*;
 
