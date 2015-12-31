@@ -5,7 +5,7 @@ package cg.data.script.antlr;
 }
 
 STRING : ('a'..'z' | 'A'..'Z' | '0'..'9')+ ; 
-BOOLEAN : 'true' | 'false' ;
+//@BOOLEAN : 'true' | 'false' ;
 //NEWLINE:'\r' ? '\n' ; 
 LOGIC : AMPERSAND AMPERSAND | BITWISEOR BITWISEOR;
 DEFINE_VALUE : INT(',' INT)*;
@@ -14,7 +14,7 @@ fragment LETTER : ('A'..'Z' | 'a'..'z');
 fragment CHINESECHAR : '\u4E00' .. '\u9FA5' | '\uF900' .. '\uFA2D';
 fragment DIGIT : '0' .. '9';
 NAME : (LETTER | UNDERLINE) (LETTER | UNDERLINE | DIGIT)* ;
-INT : DIGIT+;
+//@INT : DIGIT+;
 COLON : ':' ;
 COMMA : ',' ;
 SEMICOLON : ';' ;
@@ -54,6 +54,9 @@ EQUAL : '==' ;
 /* =========================================== */
 
 r : NAME DEFINE_VALUE;
+booleanRule : mutilBOOLEAN (('&&'|'||') mutilBOOLEAN)* ; 
+intRule : mutilINT ; 
+stringRule : STRING ; 
 
 /* =========================================== */
 /*                game function                */
