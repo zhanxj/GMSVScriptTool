@@ -46,6 +46,8 @@ public class GMSVGrammarMaker {
 				String returnClass = grammar.getReturnValue() == null ? "" : grammar.getReturnValue().getClazz();
 				if (returnClass.length() > 0) { // Cache return info.
 					rules.put(returnClass.toUpperCase(), rule);
+				} else {
+					rules.put("COMMON", rule);
 				}
 			}
 		});

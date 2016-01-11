@@ -57,6 +57,8 @@ r : NAME DEFINE_VALUE;
 booleanRule : mutilBOOLEAN (('&&'|'||') mutilBOOLEAN)* ; 
 intRule : mutilINT ; 
 stringRule : STRING ; 
+startRule : booleanRule ; 
+commonRule : mutilCOMMON* ;
 
 /* =========================================== */
 /*                game function                */
