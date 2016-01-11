@@ -13,8 +13,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.google.common.collect.Lists;
 
+/**
+ * Grammar rules reader of GMSV.
+ * @author 	fuhuiyuan
+ */
 public class GMSVGrammarReader {
 	
+	/**
+	 * Read all grammars from a file.
+	 * @param 	src
+	 * 			GMSV rule file.
+	 * @return	List of grammars.
+	 */
 	public List<Grammar> readGrammarFromFile(File src) {
 		try {
 			return readSheet(readFile(src));
@@ -24,6 +34,13 @@ public class GMSVGrammarReader {
 		}
 	}
 	
+	/**
+	 * Read an excel file.
+	 * @param 	src
+	 * 			excel file
+	 * @return	{@link Sheet}
+	 * @throws 	Exception
+	 */
 	private Sheet readFile(File src) throws Exception {
 		InputStream stream = new FileInputStream(src);
 		Workbook workbook = src.getName().endsWith(".xlsx") ? new XSSFWorkbook(stream) : new HSSFWorkbook(stream);
@@ -36,6 +53,12 @@ public class GMSVGrammarReader {
 		return null;
 	}
 	
+	/**
+	 * Read from sheet.
+	 * @param 	sheet
+	 * 			{@link Sheet}
+	 * @return	List of grammars.
+	 */
 	private List<Grammar> readSheet(Sheet sheet) {
 		int rowAmount = sheet.getLastRowNum();
 		List<Grammar> grammars = Lists.newArrayListWithCapacity(rowAmount);
@@ -54,6 +77,16 @@ public class GMSVGrammarReader {
 		return grammars;
 	}
 	
+	/**
+	 * Create synax attribute from a row of sheet.
+	 * @param 	row
+	 * 			Row of sheet.
+	 * @param 	clazzIndex
+	 * 			Class cell index of row.
+	 * @param 	descriptIndex
+	 * 			Descript cell index of row.
+	 * @return	synax attribute
+	 */
 	private Attribute createAttribute(Row row, int clazzIndex, int descriptIndex) {
 		try {
 			Attribute attribute = new Attribute();

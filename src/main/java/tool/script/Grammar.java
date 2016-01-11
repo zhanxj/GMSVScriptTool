@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+/**
+ * GMSV grammar.
+ * @author 	fuhuiyuan
+ */
 public class Grammar {
 	
 	private String name, descript, pattern;
